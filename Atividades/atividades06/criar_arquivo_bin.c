@@ -12,6 +12,12 @@ if(arquivo == NULL){
 printf("precionar um arquivo......");
 getchar();
 
+if(!feof(arquivo)){
+    printf("Fim do arquivo encontrado");
+    return 1;
+    
+}
+
 fclose(arquivo);
 
 return 0;

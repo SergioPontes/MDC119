@@ -4,9 +4,10 @@
 int main(){
 FILE *arq;
 int i=0;
+char c;
 char nome[30];
 char matricula[10];
-arq = fopen("C:\\Users\\sergi\\Desktop\\IESB demonio\\apc\\MDC119\\Atividades\\atividades07\\aluno.txt", "w");
+arq = fopen("aluno.txt", "w");
 
 if (arq == NULL)  
   {
@@ -14,9 +15,11 @@ if (arq == NULL)
      return 0;
 }
 printf("matricula\n");
+memset(matricula, '\0', sizeof(matricula));
 scanf("%s",matricula);
 while(matricula[0]!='0'){
        printf("nome \n");
+    memset(nome, '\0', sizeof(nome));
     scanf("%s",nome);
 for(i =0;i<= 10;i++){
 	fputc(matricula[i],arq);
@@ -25,6 +28,7 @@ for(i =0;i<= 30;i++){
 	fputc(nome[i],arq);
 }    
     printf("matricula\n");
+    memset(matricula, '\0', sizeof(matricula));
     scanf("%s",matricula);   
     
 }
@@ -49,5 +53,15 @@ fputc(nome[i], arq);
 i++;
 }
 fclose(arq);
-return 0;
+arq = fopen("aluno.txt", "r");
+do {
+      c = fgetc(arq);
+      if( feof(arq) ) {
+         break ;
+      }
+      printf("%c", c);
+   } while(1);
+
+   fclose(arq);
+   return(0);
 }

@@ -1,54 +1,44 @@
 #include<stdio.h>
+#include<string.h>
 
-int main(int argc, char const *argv[])
-{
+int main(){
 FILE *arq;
-int i =0;
-char nome[30];
+int i=0;
+struct {
 char matricula[10];
-arq = fopen("aluno.dat","w+b");
-if (arq == NULL)  
-  {
-     printf("Problemas na abertura do arquivo\n");
-     return 0;
-}
-printf("matricula\n");
-memset(matricula, '\0', sizeof(matricula));
-scanf("%s",matricula);
+char nome[30];
+} aluno;
 
-    for(i=0;i<10;i++){
-     fwrite(matricula,1,sizeof(matricula) , arq);
-}
-while(strcmp("0", matricula)){
+memset(&aluno, 0, sizeof(aluno));
 
-     printf("nome\n");
-     memset(nome, '\0', sizeof(nome));
-     scanf("%s",nome);
+arq=fopen("alunos.dat","w+b");
+if (arq == NULL) {
+        printf("Problemas na abertura do arquivo\n");
+    }
+printf("matricula\n ");
+scanf("%s", aluno.matricula);
 
-   
-    fwrite(nome,1,sizeof(nome) , arq);
-  
+while(strcmp("0",aluno.matricula)){
 
-    printf("matricula\n");
-    memset(matricula, '\0', sizeof(matricula));
-    scanf("%s",matricula);
+printf("nome\n");
+scanf("%s", aluno.nome);
 
-  
-     fwrite(matricula,1,sizeof(matricula) , arq);
-   
+fwrite(&aluno, sizeof(aluno), 1, arq);
+i++;
+
+printf("matricula\n ");
+scanf("%s", aluno.matricula);
+
 }
 fclose(arq);
-    fopen("aluno.dat","r+b");
+arq = fopen("alunos.dat", "rb"); 
+fseek(arq, 0 , SEEK_SET);
+memset(&aluno, 0, sizeof(aluno));
 
-while(!feof(arq)){
-    fread(&matricula,sizeof(matricula),1,arq);
-     printf("Matricula dos alunos:\n %s \n",matricula);
+while(fread(&aluno, sizeof(aluno), 1, arq)!= NULL){
+    printf("%s - %s\n", aluno.matricula, aluno.nome);
+   
 }
-while(!feof(arq)){
-    fread(&nome,sizeof(nome),1,arq);
-     printf("Nomes dos alunos :\n %s \n",nome);
-
-}  
 fclose(arq);
 return 0;
 }
