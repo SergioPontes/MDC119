@@ -4,7 +4,7 @@ int main() {
 
 FILE *arquivo;
 
-arquivo = fopen("C:\\Users\\sergi\\Desktop\\IESB demonio\\apc\\MDC119\\Atividades\\atividades06\\arquivoBIN.bin","wb");
+arquivo = fopen("arquivoBIN.bin","w+b");
 
 if(arquivo == NULL){
     printf("Erro ao abrir o arquivo");
